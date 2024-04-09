@@ -11,10 +11,12 @@
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
+  color: inherit;
 }
 body{
   font-family: "IQOS";
-  /* overflow: hidden; */
+  color: #34303d;
+
 }
 button{
   padding: 12px 32px;
@@ -27,7 +29,7 @@ button{
   cursor: pointer;
 }
 .header__desctop{
-  position: fixed;
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 26px 40px;
@@ -65,228 +67,270 @@ main{
   width: 70vw;
   margin: 0 auto;
 }
-.main__section-content{
-  width: 100%;
-}
 .modal__wrapper{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  transition: all .3s ease;
+}
+.modal__wrapper.active{
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  position: fixed;
+  height: 100vh;  
   background: rgba(52, 48, 61, 0.6);  
 }
-
 .modal{
-  width: 65vw;
-  height: 390px;
-  background: linear-gradient(327deg, #fff9e6 0%, #ffe69a 33.6%, #e35898 63.98%, #da32b5 100%); 
-  background-repeat: no-repeat;
-  border-radius: 24px;
-}
-.modal-hidden{
   display: none;
 }
-.modal__content{
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-  border-radius: 24px;
-  background-image: url(./img/texture.png);
-  background-size: cover;
-  background-repeat: no-repeat;
+.modal.active {
+  position: absolute;
+  display: block;
+  width: 437px;
+  padding: 50px;
+  background-color: #fff;
+  z-index: 7;
+}
+.modal__title{
+  font-size: 24px;
+  margin-bottom: 40px;
 }
 .modal__close{
   position: absolute;
-  right: 35px;
-  top: 35px;
+  top: 55px;
+  right: 50px;
   cursor: pointer;
-
 }
-.modal__content-text{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  gap: 40px;
-  height: 100%;
-  padding-left: 40px;
-}
-.modal__content-title{
-  max-width: 420px;
-  color: #fff;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 131%; 
-}
-.modal__desc{
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  height: 76px;
-  text-transform: uppercase;
-  text-align: center;
-  color: #b8b7bb;
-}
-.modal__desc-mobile{
-  display: none;
-}
-.banner{
-  display: none;
-}
-.banner-open{
+.modal__form{
   position: relative;
-  display: block;
-  height: 85%;
-  margin: 0;
-  border-radius: 30px 30px 0 0;
-  border: none;
-  z-index: 8;
-  box-shadow: 0 -1px 7px 0 rgba(0, 0, 0, 0.25);
-  
-}
-.form__banner{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;  
-  padding: 30px 10px;
-  background-color: #fff;
-
-}
-.form__banner-close{
-  cursor: pointer;
-}
-.form__banner-title{
-  font-size: 34px;
-}
-.form{
   display: flex;
   flex-direction: column;
   gap: 30px;
-  width: 309px;
+  margin: 30px 0;
 }
-.form__banner-input{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-.form__banner-input svg{
-position: absolute;
-}
-.form__banner-input span{
-  position: absolute;
-  top: -13px;
-  left: 30px;
-  color: #8BAB3A;
-}
-.banner-input{
+.modal__form-input{
   padding: 15px;
-  border: none;
+  border: 1px solid #e1e0e2;
+  border-radius: 3px;
 }
-.banner-input-delete{
-  position: absolute;
-  right: 30px;
-  top: 13px;
+.modal__form-label{
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.modal__form-dates{
+  display: flex;  
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.modal__form-dates p:first-child{
+  font-weight: 700;
+}
+.modal__form-date{
+  padding: 8px 24px;
+  border-radius: 3px;
+  border: 2px solid #949494;
+  cursor: pointer; 
+}
+.modal__form-date.active{
+  border: 2px solid #34303d;
+}
+.modal__form-time{
+  color: #00D1D2;
   cursor: pointer;
 }
-.form__check{
+.modal__form-calendar{
+  display: none;
+}
+.modal__form-calendar.active{
+  position: relative;
+  display: block;
+}
+.calendar__content{
+  position: absolute;
+  top: -20px;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  justify-items: center;
+  padding: 10px;
+  gap: 10px;
+  width: 350px;
+  background-color: #fff;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+  z-index: 8;
+}
+.calendar__content-item{
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.calendar__content-item.active{
+  background-color: #00D1D2;
+  border-radius: 60px;
+}
+.thunks{
+  display: none;
+}
+.thunks.active{
+  position: absolute;
   display: flex;
-  gap: 15px;
+  flex-direction: column;
+  gap: 32px;
+  width: 437px;
+  height: 100%;
+  padding: 50px;
+  background-color: #fff;
+  z-index: 7;
 }
-.form__check-order{
+.main__section{
+  position: relative;
+  height: calc(100vh - 84px) ;
+}
+.desc{
   display: flex;
-  gap: 15px;
-  align-items: start;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 0;
+  padding: 26px;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  color: #b8b7bb;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.05);
+  background: #fff;
 }
-@media (max-width: 1065px) {
-  .modal{
-    width: 85vw;
-  }  
+.desc-mobile,
+.header__mobile{
+  display: none;
 }
+.main__nav{
+  display: flex;
+  gap: 5px;
+  padding: 20px 0;
+  margin-bottom: 32px;
+  
+}
+.main__nav-link{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #949494;
+}
+.main__content{
+width: 564px;
+}
+.main__content-prev{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #00d1d2;
+  margin-bottom: 40px;
+}
+.main__content-title{
+  font-size: 28px;
+  margin-top: 16px;
+}
+.main__content-desc{
+  margin: 32px 0;
+}
+.main__content-btns{
+  display: flex;
+  gap: 16px;
+}
+.main__content-btn{
+  color: #34303d;
+  background-color: #fff;
+  border: 2px solid #34303d;
+}
+
 @media (max-width:945px){
   .header__desctop,
-  .modal__desc{
+  .desc{
     display: none;
   }
-  .modal__desc-mobile{
-    position: absolute;
-    top: 0;
+  .container{
+    margin: 0 32px;
+    width: auto;
+  }
+  .desc-mobile{
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
     color: #949494;
     background-color: #fff;
+    box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.05);
     text-transform: uppercase;
-    padding: 15px;
+    padding:15px 32px ;
+    font-size: 12px;
+    z-index: 6;
   }
   .header__mobile{
     position:fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     bottom: 0;
     width: 100%;
-    padding: 25px;
+    padding: 0 15px;
     background-color: #fff;
-    z-index: 6;
+    box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.08);
+    z-index: 9;
   }
-  .modal{
-    height: 85vw;
-  }
-  .modal__content{
-    flex-direction: column;
-  }
-  .modal__content-text{
-    margin: 50px 0 30px;
-    padding: 0;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .modal__content-title{
-    width: 100%;
-    padding: 0 20px; 
-    text-align: center;
-  }
-  .modal__content-img{
-    position: absolute;  
-    top: 20px;
-    width: 100%;
-    height: 100%;
+  .header__mobile-link{
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    z-index: 0;    
+    gap: 6px;
+    min-width: 63px;
   }
-  .modal__content-img img{
-    width: 65vw;  
+  .header__mobile-link:nth-child(3){
+    position: relative;
+    top: -20px;
+    background-color: #00D1D2;
+    padding: 20px;
+    border-radius: 100px;
+  }
+  .header__mobile-link__name{
+    font-size: 10px;
+  }
+  .main__content{
+    width: 100%;
+   padding-bottom: 100px;
+  }
+  .main__content-title{
+    font-size: 24px;
+  }
+  .main__content-desc{
+    width: 300px;
+  }
+  .main__content-btns{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .modal.active,
+  .thunks.active{
+    width: 100%;
+   padding: 20px;
+  }
+  .modal.active{
+   padding-bottom: 150px;
+  }
+  .calendar__content {   
+ left: 0px;
   }
   .modal__close{
-    right: 25px;
-    top: 25px;
-    z-index: 1;
+    right: 20px;
+    top: 20px;
   }
-  .modal__content-btn{
-    z-index: 1;
+  .thunks.active{
+    position: fixed;
+    border-radius: 30px 30px 0 0 ;
+    height: 230px;
+    bottom: 60px;
   }
 }
-@media (max-width: 715px){
-  .modal{
-    height: 110vw;
-  } 
-}
-@media (max-width: 500px){
-  .modal__content-title{
-     font-size: 20px;
-   }
-   .modal__desc-mobile{
-    font-size: 12px;
-   }
- }
-
- 
